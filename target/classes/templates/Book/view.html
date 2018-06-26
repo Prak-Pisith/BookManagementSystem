@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{Book/layout/master}">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Bokor|Taviraj" rel="stylesheet">
+    <title>View Detail</title>
+</head>
+<body>
+    <div class="content-wrapper" layout:fragment="content">
+
+    <!--<h1 th:text="#{view_book}" id="view_title"></h1>-->
+
+    <!--<th:block th:if="${book} != null" th:object="${book}">-->
+        <!--<span th:text="#{table.id}"></span> : [[*{id}]] <br>-->
+        <!--<span th:text="#{table.title}"></span> : [[*{title}]] <br>-->
+        <!--<span th:text="#{table.author}"></span> : [[*{author}]] <br>-->
+        <!--<span th:text="#{table.publisher}"></span> : [[*{publisher}]] <br>-->
+        <!--&lt;!&ndash;Thumbnial : [[*{thumbnail}]] <br>&ndash;&gt;-->
+        <!--&lt;!&ndash;<img style="width:300px; height: 100px;" th:src="${book.getThumbnail()}" alt="">&ndash;&gt;-->
+        <!--<span th:text="#{table.thumbnail}"></span> : <img src="[[*{thumbnail}]]" alt=""> <br>-->
+    <!--</th:block>-->
+
+    <!--<h1 th:unless="${book}"><span th:text="#{donot_have_book}"></span></h1>-->
+
+        <div class="container" style="border: 1px solid red; margin-top: 5%; background: linear-gradient(to bottom right, #ffff99 0%, #ff9933 100%);">
+            <h2 th:text="#{view_book}"></h2>
+            <th:block th:if="${book} != null" th:object="${book}">
+            <form  action="/index" th:object="${book}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="control-label col-sm-2"><span th:text="#{table.id}"></span> : </label>
+                    <div class="col-sm-10">
+                        <!--<input type="text" class="form-control" id="getid" name="title" >-->
+                        <label>[[*{id}]]</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" ><span th:text="#{table.title}"></span> : </label>
+                    <div class="col-sm-10">
+                        <!--<input type="text" class="form-control" id="gettitle" placeholder="Enter Title" name="title">-->
+                        <label >[[*{title}]]</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" ><span th:text="#{table.author}"></span> : </label>
+                    <div class="col-sm-10">
+                        <!--<input type="text" class="form-control" id="getauthor" placeholder="Enter Author" name="author">-->
+                        <label >[[*{author}]]</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" ><span th:text="#{table.publisher}"></span> : </label>
+                    <div class="col-sm-10">
+                        <!--<input type="text" class="form-control" id="getpublisher" placeholder="Enter Publisher" name="publisher">-->
+                        <label>[[*{publisher}]]</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" ><span th:text="#{table.thumbnail}"></span> : </label>
+                    <div class="col-sm-10">
+                        <!--<input type="text" class="form-control" id="getpublisher" placeholder="Enter Publisher" name="publisher">-->
+                        <label><img src="[[*{thumbnail}]]" alt="Image unload"></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" value="OK">
+                    </div>
+                </div>
+            </form>
+        </th:block>
+        <h1 th:unless="${book}"><span th:text="#{donot_have_book}"></span></h1>
+
+        </div>
+
+        <style>
+            body{
+                font-family: Bokor,Taviraj;
+            }
+            label{
+                overflow: hidden;
+            }
+        </style>
+
+    </div>
+
+    <!--ID: [[${book.id}]] <br>-->
+    <!--Title: [[${book.title}]] <br>-->
+    <!--Author: [[${book.author}]] <br>-->
+    <!--Publisher: [[${book.publisher}]] <br>-->
+
+</body>
+</html>

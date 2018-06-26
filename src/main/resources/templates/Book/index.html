@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{Book/layout/master}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{greating.message}"></title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Bokor" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bokor|Taviraj" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <div class="content-wrapper" layout:fragment="content">
+
+    <!--<h1 th:text="#{Book_Information}"></h1>-->
+    <!--it's thymeleaf-->
+    <!--expression-->
+    <!--[[${books}]]-->
+    <!--<a href="/create" th:text="#{Create_Book}"></a>-->
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>\
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+           $('body').on('click', '.btnDelete', function () {
+               //getting ID
+              var data_id = ($(this).attr("data-id"));
+              //Alert asking
+              if(confirm("Do you want to delete?")) {
+                  //What ?
+                  window.location = "http://localhost:1234/delete/" + data_id;
+              }
+           });
+        });
+    </script>
+
+    <div class="container">
+        <a href="/create" class="btn btn-default" id="btnInsert"><span>Insert Book</span></a>
+        <table id="customers">
+            <tr>
+                <th th:text="#{table.id}"></th>
+                <th th:text="#{table.title}"></th>
+                <th th:text="#{table.author}"></th>
+                <th th:text="#{table.publisher}"></th>
+                <th th:text="#{table.thumbnail}"></th>
+                <th th:text="#{table.Category}"></th>
+                <th th:text="#{table.action}"></th>
+            </tr>
+            <tr th:each="book:${books}">
+                <!--using inline-->
+                <td>[[${book.id}]]</td>
+                <!--using text-->
+                <!--it's overrided all text-->
+                <td th:text="${book.getTitle()}"></td>
+                <td th:text="${book.getAuthor()}"></td>
+                <td th:text="${book.getPublisher()}"></td>
+                <td>
+                    <img style="width:100px; height: 150px;" th:src="${book.getThumbnail()}" alt="">
+                </td>
+                <td th:text="${book.category.name}"></td>
+                <td>
+                    <a th:href="@{/view/{id}(id=${book.getId()})}"><button class="btn" id="btnview"><span class="glyphicon">&#xe105;</span></button></a>
+                    <a th:href="@{/update/{id}(id=${book.getId()})}"><button class="btn" id="btnupdate"><span class="glyphicon glyphicon-wrench"></span></button></a>
+                    <!--getting id by Attribute-->
+                    <button class="btnDelete btn" id="btndelete" th:attr="data-id = ${book.getId()}"><span class="glyphicon glyphicon-remove-sign"></span></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <style>
+        body, .container, tr {
+            font-family: Bokor,Taviraj;
+        }
+
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+        #customers tr:nth-child(odd){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #FFF993;}
+
+        #customers th {
+            padding-top: 12px;
+            text-align: left;
+            font-size: 20px;
+            /*background-color: #4CAF50;*/
+            background: linear-gradient(to bottom right, #ffff99 0%, #ff9933 100%);
+            color: black;
+        }
+        #customers td{
+            color: #212121;
+            font-size: 16px;
+            overflow: hidden;
+        }
+        .btn{
+            border-radius: 50%;
+            font-size: 30px;
+        }
+        #btndelete{
+            background-color: red;
+        }
+        #btnupdate{
+            background-color:yellow ;
+        }
+        #btnview{
+            background-color: green;
+        }
+        #btnInsert{
+            background-color: #1E90FF;
+        }
+    </style>
+
+    </div>
+</body>
+</html>

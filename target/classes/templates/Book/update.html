@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{Book/layout/master}">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Update Books</title>
+</head>
+<body>
+    <!--<h1>Update Books</h1>-->
+
+    <!--<form action="/update/submit" method="post" th:object="${book}" enctype="multipart/form-data">-->
+        <!--<input type="hidden" th:field="*{id}"> <br>-->
+        <!--<span th:text="#{table.title}"></span> : <input type="text" th:field="*{title}">-->
+        <!--<span style="color: red;"-->
+              <!--th:if="${#fields.hasErrors()}"-->
+              <!--th:text="${#fields.errors('title')[0]}">Error</span> <br>-->
+        <!--<span th:text="#{table.author}"></span> : <input type="text" th:field="*{author}">-->
+        <!--<span style="color: red;"-->
+              <!--th:if="${#fields.hasErrors()}"-->
+              <!--th:text="${#fields.errors('author')[0]}">Error</span><br>-->
+        <!--<span th:text="#{table.publisher}"></span> : <input type="text" th:field="*{publisher}">-->
+        <!--<span style="color: red;"-->
+              <!--th:if="${#fields.hasErrors()}"-->
+              <!--th:text="${#fields.errors('publisher')[0]}">Error</span><br>-->
+        <!--<input type="file" name="file">-->
+        <!--<input type="submit" value="Submit">-->
+    <!--</form>-->
+
+    <div class="content-wrapper" layout:fragment="content">
+        <div class="container" style="border: 1px solid red; margin-top: 4.5%; background: linear-gradient(to bottom right, #ffff99 0%, #ff9933 100%);">
+            <h2 th:text="#{UpdateBook}"></h2>
+            <form  action="/update/submit" method="post" th:object="${book}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="getid"><span th:text="#{table.id}"></span> : </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="getid" placeholder="Enter ID" name="id" th:field="*{id}" hidden>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="gettitle"><span th:text="#{table.title}"></span> : </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="gettitle" placeholder="Enter Title" name="title" th:field="*{title}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="getauthor"><span th:text="#{table.author}"></span> : </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="getauthor" placeholder="Enter Author" name="author" th:field="*{author}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="getpublisher"><span th:text="#{table.publisher}"></span> : </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="getpublisher" placeholder="Enter Publisher" name="publisher" th:field="*{publisher}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="getthumbnail"><span th:text="#{table.thumbnail}"></span> : </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="getthumbnail" placeholder="Enter Publisher" name="publisher" th:field="*{thumbnail}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2"><span th:text="#{table.Category}"></span> : </label>
+                    <div class="col-sm-10">
+                        <select th:name="category.id" id="category_id">
+                            <option th:each="category: ${categories}" th:object="${category}" th:value="*{id}" th:text="*{name}">Category Name</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">-->
+                <!--<div class="col-sm-offset-2 col-sm-10">-->
+                <!--<div class="checkbox">-->
+                <!--<label><input type="checkbox" name="remember"> Remember me</label>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="file" name="file">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" value="Submit">
+                    </div>
+                </div>
+
+            </form>
+
+            <script src="/static/js/jquery-3.3.1.min.js"></script>
+            <script th:inline="javascript">
+
+                /*<![CDATA[*/
+                var categories = /*[[${categories}]]*/ null;
+                var book_cate_id = /*[[${book.category.id}]]*/ null;
+                //console.log(book_cate_id);
+                /*]]>*/
+
+                $(document).ready(function () {
+                    $.each(categories, function (index, category) {
+                       // console.log(category);
+                        if(category.id == book_cate_id){
+                            $('#category_id option[value="'+book_cate_id+'"]').attr('selected', 'selected');
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+
+</body>
+</html>

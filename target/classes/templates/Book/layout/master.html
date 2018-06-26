@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"  >
+<head>
+    <meta charset="UTF-8">
+    <title>Master</title>
+</head>
+<body>
+    <div th:replace="Book/fragments/header :: fr_header">
+
+    </div>
+
+    <div layout:fragment="content">
+        <h1>Default Master layout contents</h1>
+    </div>
+
+    <div th:replace="Book/fragments/footer.html :: fr_footer">
+
+    </div>
+
+    <style>
+        body{
+            background-image: url("https://images8.alphacoders.com/476/thumb-1920-476792.jpg") ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+
+</body>
+</html>
